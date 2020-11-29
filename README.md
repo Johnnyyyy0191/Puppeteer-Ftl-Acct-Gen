@@ -8,6 +8,8 @@ Install puppeteer, npm i puppeteer
 
 install fetch, npm i node-fetch 
 
+install fs, npm i fs
+
 Run the program, node index.js 
 
 Needs to be the same amount of emails, names, and phone numbers in their respective txt files 
