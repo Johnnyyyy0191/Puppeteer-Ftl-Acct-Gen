@@ -1,0 +1,19 @@
+{
+  "name": "FtlAcctGen",
+  "version": "1.0.0",
+  "description": "Flx Account generator ",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "node-fetch": "^2.6.1",
+    "puppeteer": "^5.5.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Johnnyyyy#0191",
+  "license": "ISC"
+}
