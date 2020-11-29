@@ -3,6 +3,7 @@ const fs = require('fs')
 const fetch = require('node-fetch')
 const url = 'https://www.footlocker.com/account/create'
 const webhookUrl = '' //input your discord webhook here
+const zip = '' //enter your zip code
 
 const emailstxt = fs.readFileSync("./emails.txt", "utf-8");
 const emails = emailstxt.split("\n")
@@ -58,11 +59,10 @@ console.log(password)
 
 
 for (i = 0; i < emails.length; i++) {
-    const email = emails[i]
-    const firstName = firstNames[i]
-    const lastName = lastNames[i]
-    const phoneNumber = phoneNumbers[i]
-    const zip = '' //enter your zip code
+    let email = emails[i]
+    let firstName = firstNames[i]
+    let lastName = lastNames[i]
+    let phoneNumber = phoneNumbers[i]
 
     let proxyIp = ''
     let proxyPort = ''
