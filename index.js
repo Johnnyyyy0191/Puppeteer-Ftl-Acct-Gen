@@ -45,31 +45,34 @@ const lowerCase = "abcdefghijklmnopqrstuvwxyz"
 const number = "1234567890"
 const special = "$#@!%&"
 
-let u1 = Math.floor(Math.random() * Math.floor(upperCase.length))
-let u2 = Math.floor(Math.random() * Math.floor(upperCase.length))
-let u3 = Math.floor(Math.random() * Math.floor(upperCase.length))
-let l1 = Math.floor(Math.random() * Math.floor(lowerCase.length))
-let l2 = Math.floor(Math.random() * Math.floor(lowerCase.length))
-let l3 = Math.floor(Math.random() * Math.floor(lowerCase.length))
-let n = Math.floor(Math.random() * Math.floor(number.length))
-let s = Math.floor(Math.random() * Math.floor(special.length))
+async function start () {
+    for (i = 0; i < emails.length; i++) {
 
-const password = upperCase.charAt(u1) + upperCase.charAt(u2) + upperCase.charAt(u3) + lowerCase.charAt(l1) + lowerCase.charAt(l2) + lowerCase.charAt(l3) + number.charAt(n) + special.charAt(s)
-console.log(password)
+        let u1 = Math.floor(Math.random() * Math.floor(upperCase.length))
+        let u2 = Math.floor(Math.random() * Math.floor(upperCase.length))
+        let u3 = Math.floor(Math.random() * Math.floor(upperCase.length))
+        let l1 = Math.floor(Math.random() * Math.floor(lowerCase.length))
+        let l2 = Math.floor(Math.random() * Math.floor(lowerCase.length))
+        let l3 = Math.floor(Math.random() * Math.floor(lowerCase.length))
+        let n = Math.floor(Math.random() * Math.floor(number.length))
+        let s = Math.floor(Math.random() * Math.floor(special.length))
 
+        let email = emails[i]
+        let firstName = firstNames[i]
+        let lastName = lastNames[i]
+        let phoneNumber = phoneNumbers[i]
+        let password = upperCase.charAt(u1) + upperCase.charAt(u2) + upperCase.charAt(u3) + lowerCase.charAt(l1) + lowerCase.charAt(l2) + lowerCase.charAt(l3) + number.charAt(n) + special.charAt(s)
+        console.log(password)
+    
+        //let proxyIp = ''
+        //let proxyPort = ''
+        //let proxyUser = ''
+        //let proxyPass = ''
+        await main(email, firstName, lastName, phoneNumber, password)
+    }
+}
 
-for (i = 0; i < emails.length; i++) {
-    let email = emails[i]
-    let firstName = firstNames[i]
-    let lastName = lastNames[i]
-    let phoneNumber = phoneNumbers[i]
-
-    let proxyIp = ''
-    let proxyPort = ''
-    let proxyUser = ''
-    let proxyPass = ''
-
-const main = async () => {
+const main = async (email, fname, lname, phoneNumber, password) => {
     const browser = await puppeteer.launch({
         headless: false,
         //args: [`--proxy-server = ${proxyIp}:${proxyPort}`]
@@ -78,8 +81,8 @@ const main = async () => {
     //await page.authenticate({username: proxyUser, password: proxyPass})
     await page.goto(url, { waitUntil: 'networkidle2' })
     await page.waitForSelector('input[id="AccountCreate_text_firstName"]')
-    await page.type('input[id="AccountCreate_text_firstName"]', firstName)
-    await page.type('input[id="AccountCreate_text_lastName"]', lastName)
+    await page.type('input[id="AccountCreate_text_firstName"]', fname)
+    await page.type('input[id="AccountCreate_text_lastName"]', lname)
     await page.type('input[id="AccountCreate_tel_dateofbirthmonth"]', monthInput)
     await page.type('input[id="AccountCreate_tel_dateofbirthday"]', dayInput)
     await page.type('input[id="AccountCreate_tel_dateofbirthyear"]', yearInput)
@@ -129,8 +132,8 @@ const main = async () => {
         await browser.close()
     } else if (await page.url() == 'https://www.footlocker.com/account/create') {
         await page.waitForTimeout(500)
-        await page.type('input[id="AccountCreate_text_firstName"]', firstName)
-    await page.type('input[id="AccountCreate_text_lastName"]', lastName)
+        await page.type('input[id="AccountCreate_text_firstName"]', fname)
+    await page.type('input[id="AccountCreate_text_lastName"]', lname)
     await page.type('input[id="AccountCreate_tel_dateofbirthmonth"]', monthInput)
     await page.type('input[id="AccountCreate_tel_dateofbirthday"]', dayInput)
     await page.type('input[id="AccountCreate_tel_dateofbirthyear"]', yearInput)
@@ -183,6 +186,4 @@ const main = async () => {
         console.log('fail')
         await browser.close()
     }    
-}
-main()
 }
